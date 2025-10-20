@@ -1,16 +1,168 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import BlogCard from '../components/BlogCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
 
+const posts = await getCollection('blog');
+const projects = await getCollection('projects');
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Jeff - AI-First Product Engineer">
+	<main class="home">
+		<section class="hero">
+			<div class="hero-content">
+				<h1>Building thoughtful digital products with AI</h1>
+				<p class="hero-subtitle">
+					Product engineer crafting calm, intelligent interfaces that help you think, not just publish.
+				</p>
+				<div class="hero-links">
+					<a href="/blog" class="btn-primary">Read my thoughts</a>
+					<a href="#projects" class="btn-secondary">See my work</a>
+				</div>
+			</div>
+		</section>
+
+		<section id="about" class="about">
+			<div class="about-content">
+				<h2>About</h2>
+				<p>
+					I'm a product engineer who believes in the power of AI-first development to create 
+					digital products that actually serve their users. Based in Spain, I focus on building 
+					systems that front-load clarity over chaos, with interfaces that lower nervous system 
+					activation rather than chase dopamine hits.
+				</p>
+				<p>
+					When I'm not coding, you'll find me appreciating the strategic precision of football, 
+					snooker, padel, and poker. I value flow states and the quiet confidence that comes 
+					from thoughtful preparation.
+				</p>
+			</div>
+		</section>
+
+		<section id="projects" class="projects">
+			<h2>Featured Projects</h2>
+			<div class="projects-grid">
+				{projects.slice(0, 3).map((project) => (
+					<ProjectCard project={project} />
+				))}
+			</div>
+			<div class="projects-link">
+				<a href="/projects" class="btn-secondary">View all projects</a>
+			</div>
+		</section>
+
+		<section class="recent-posts">
+			<h2>Recent Thoughts</h2>
+			<div class="posts-grid">
+				{posts.slice(0, 3).map((post) => (
+					<BlogCard post={post} />
+				))}
+			</div>
+			<div class="posts-link">
+				<a href="/blog" class="btn-secondary">Read all posts</a>
+			</div>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	.home {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+
+	.hero {
+		padding: 4rem 0 6rem;
+		text-align: center;
+	}
+
+	.hero h1 {
+		font-size: 3rem;
+		font-weight: 300;
+		line-height: 1.2;
+		margin-bottom: 1.5rem;
+		color: var(--text-primary);
+	}
+
+	.hero-subtitle {
+		font-size: 1.25rem;
+		color: var(--text-secondary);
+		margin-bottom: 3rem;
+		max-width: 600px;
+		margin-left: auto;
+		margin-right: auto;
+		line-height: 1.6;
+	}
+
+	.hero-links {
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.about {
+		padding: 4rem 0;
+		border-top: 1px solid var(--border-color);
+	}
+
+	.about-content {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.about h2 {
+		font-size: 2rem;
+		font-weight: 300;
+		margin-bottom: 2rem;
+		color: var(--text-primary);
+	}
+
+	.about p {
+		font-size: 1.1rem;
+		line-height: 1.7;
+		color: var(--text-secondary);
+		margin-bottom: 1.5rem;
+	}
+
+	.projects, .recent-posts {
+		padding: 4rem 0;
+		border-top: 1px solid var(--border-color);
+	}
+
+	.projects h2, .recent-posts h2 {
+		font-size: 2rem;
+		font-weight: 300;
+		margin-bottom: 3rem;
+		text-align: center;
+		color: var(--text-primary);
+	}
+
+	.projects-grid, .posts-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2rem;
+		margin-bottom: 3rem;
+	}
+
+	.projects-link, .posts-link {
+		text-align: center;
+	}
+
+	@media (max-width: 768px) {
+		.hero h1 {
+			font-size: 2.5rem;
+		}
+		
+		.hero-subtitle {
+			font-size: 1.1rem;
+		}
+		
+		.hero-links {
+			flex-direction: column;
+			align-items: center;
+		}
+	}
+</style>

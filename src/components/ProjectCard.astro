@@ -1,0 +1,130 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+export interface Props {
+	project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { slug, data } = project;
+---
+
+<article class="project-card">
+	<div class="project-card-content">
+		<h3 class="project-card-title">
+			<a href={data.url || `/projects/${slug}`} target={data.url ? '_blank' : '_self'}>
+				{data.title}
+			</a>
+		</h3>
+		<p class="project-card-description">{data.description}</p>
+		{data.tech && data.tech.length > 0 && (
+			<div class="project-card-tech">
+				{data.tech.map((tech: string) => (
+					<span class="tech-tag">{tech}</span>
+				))}
+			</div>
+		)}
+		<div class="project-card-links">
+			{data.url && (
+				<a href={data.url} target="_blank" rel="noopener" class="project-link">
+					Live Demo
+				</a>
+			)}
+			{data.github && (
+				<a href={data.github} target="_blank" rel="noopener" class="project-link">
+					GitHub
+				</a>
+			)}
+		</div>
+	</div>
+</article>
+
+<style>
+	.project-card {
+		background-color: var(--bg-secondary);
+		border: 1px solid var(--border-color);
+		border-radius: var(--radius);
+		padding: 1.5rem;
+		transition: all 0.2s ease;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.project-card:hover {
+		border-color: var(--accent-color);
+		box-shadow: var(--shadow-md);
+		transform: translateY(-2px);
+	}
+
+	.project-card-content {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+	}
+
+	.project-card-title {
+		margin-bottom: 0.75rem;
+		font-size: 1.25rem;
+		font-weight: 500;
+		line-height: 1.4;
+	}
+
+	.project-card-title a {
+		color: var(--text-primary);
+		text-decoration: none;
+		transition: color 0.2s ease;
+	}
+
+	.project-card-title a:hover {
+		color: var(--accent-color);
+	}
+
+	.project-card-description {
+		color: var(--text-secondary);
+		margin-bottom: 1rem;
+		flex-grow: 1;
+		line-height: 1.6;
+	}
+
+	.project-card-tech {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-bottom: 1rem;
+	}
+
+	.tech-tag {
+		background-color: var(--bg-primary);
+		color: var(--text-secondary);
+		padding: 0.25rem 0.5rem;
+		border-radius: 4px;
+		font-size: 0.8rem;
+		border: 1px solid var(--border-color);
+	}
+
+	.project-card-links {
+		display: flex;
+		gap: 1rem;
+		margin-top: auto;
+	}
+
+	.project-link {
+		color: var(--accent-color);
+		font-size: 0.9rem;
+		font-weight: 500;
+		text-decoration: none;
+		transition: color 0.2s ease;
+	}
+
+	.project-link:hover {
+		color: var(--accent-hover);
+	}
+
+	@media (max-width: 768px) {
+		.project-card-links {
+			flex-direction: column;
+			gap: 0.5rem;
+		}
+	}
+</style>

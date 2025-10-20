@@ -1,0 +1,230 @@
+---
+export interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "Product engineer crafting calm, intelligent interfaces that help you think, not just publish." } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		<header class="header">
+			<nav class="nav">
+				<a href="/" class="nav-logo">Jeff</a>
+				<div class="nav-links">
+					<a href="/blog">Blog</a>
+					<a href="/projects">Projects</a>
+					<a href="#contact">Contact</a>
+				</div>
+			</nav>
+		</header>
+		
+		<slot />
+		
+		<footer class="footer">
+			<div class="footer-content">
+				<p>&copy; 2024 Jeff. Building thoughtful digital products.</p>
+				<div class="footer-links">
+					<a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+					<a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+					<a href="mailto:hello@jeff.dev">Email</a>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>
+
+<style is:global>
+	:root {
+		--bg-primary: #fafafa;
+		--bg-secondary: #ffffff;
+		--text-primary: #1a1a1a;
+		--text-secondary: #666666;
+		--text-muted: #999999;
+		--border-color: #e5e5e5;
+		--accent-color: #2563eb;
+		--accent-hover: #1d4ed8;
+		--shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+		--shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+		--radius: 8px;
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
+	html {
+		font-family: 'Inter', system-ui, -apple-system, sans-serif;
+		line-height: 1.6;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	body {
+		margin: 0;
+		background-color: var(--bg-primary);
+		color: var(--text-primary);
+		font-size: 16px;
+		line-height: 1.6;
+	}
+
+	/* Typography */
+	h1, h2, h3, h4, h5, h6 {
+		margin: 0 0 1rem 0;
+		font-weight: 300;
+		line-height: 1.3;
+	}
+
+	h1 { font-size: 2.5rem; }
+	h2 { font-size: 2rem; }
+	h3 { font-size: 1.5rem; }
+	h4 { font-size: 1.25rem; }
+
+	p {
+		margin: 0 0 1rem 0;
+	}
+
+	a {
+		color: var(--accent-color);
+		text-decoration: none;
+		transition: color 0.2s ease;
+	}
+
+	a:hover {
+		color: var(--accent-hover);
+	}
+
+	/* Buttons */
+	.btn-primary, .btn-secondary {
+		display: inline-block;
+		padding: 0.75rem 1.5rem;
+		border-radius: var(--radius);
+		font-weight: 500;
+		text-decoration: none;
+		transition: all 0.2s ease;
+		border: 1px solid transparent;
+	}
+
+	.btn-primary {
+		background-color: var(--accent-color);
+		color: white;
+	}
+
+	.btn-primary:hover {
+		background-color: var(--accent-hover);
+		color: white;
+	}
+
+	.btn-secondary {
+		background-color: transparent;
+		color: var(--text-primary);
+		border-color: var(--border-color);
+	}
+
+	.btn-secondary:hover {
+		background-color: var(--bg-secondary);
+		border-color: var(--accent-color);
+		color: var(--accent-color);
+	}
+
+	/* Header */
+	.header {
+		background-color: var(--bg-secondary);
+		border-bottom: 1px solid var(--border-color);
+		position: sticky;
+		top: 0;
+		z-index: 100;
+		backdrop-filter: blur(10px);
+	}
+
+	.nav {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 1rem 2rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.nav-logo {
+		font-size: 1.5rem;
+		font-weight: 500;
+		color: var(--text-primary);
+		text-decoration: none;
+	}
+
+	.nav-links {
+		display: flex;
+		gap: 2rem;
+	}
+
+	.nav-links a {
+		color: var(--text-secondary);
+		font-weight: 400;
+		transition: color 0.2s ease;
+	}
+
+	.nav-links a:hover {
+		color: var(--text-primary);
+	}
+
+	/* Footer */
+	.footer {
+		background-color: var(--bg-secondary);
+		border-top: 1px solid var(--border-color);
+		margin-top: 4rem;
+	}
+
+	.footer-content {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 2rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 1rem;
+	}
+
+	.footer-links {
+		display: flex;
+		gap: 1.5rem;
+	}
+
+	.footer-links a {
+		color: var(--text-secondary);
+		font-size: 0.9rem;
+	}
+
+	/* Responsive */
+	@media (max-width: 768px) {
+		.nav {
+			padding: 1rem;
+		}
+		
+		.nav-links {
+			gap: 1rem;
+		}
+		
+		.footer-content {
+			flex-direction: column;
+			text-align: center;
+		}
+		
+		h1 { font-size: 2rem; }
+		h2 { font-size: 1.75rem; }
+	}
+</style>

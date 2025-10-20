@@ -1,0 +1,122 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import ProjectCard from '../../components/ProjectCard.astro';
+
+const projects = await getCollection('projects');
+const featuredProjects = projects.filter(project => project.data.featured);
+const otherProjects = projects.filter(project => !project.data.featured);
+---
+
+<Layout title="Projects - Jeff" description="A showcase of AI-first digital products and thoughtful interfaces I've built.">
+	<main class="projects-page">
+		<div class="projects-header">
+			<h1>Featured Work</h1>
+			<p class="projects-subtitle">
+				Digital products built with AI-first development principles, focusing on 
+				calm interfaces and thoughtful user experiences.
+			</p>
+		</div>
+
+		{featuredProjects.length > 0 && (
+			<section class="featured-projects">
+				<h2>Featured Projects</h2>
+				<div class="projects-grid">
+					{featuredProjects.map((project) => (
+						<ProjectCard project={project} />
+					))}
+				</div>
+			</section>
+		)}
+
+		{otherProjects.length > 0 && (
+			<section class="other-projects">
+				<h2>Other Projects</h2>
+				<div class="projects-grid">
+					{otherProjects.map((project) => (
+						<ProjectCard project={project} />
+					))}
+				</div>
+			</section>
+		)}
+
+		{projects.length === 0 && (
+			<div class="empty-state">
+				<h3>Projects Coming Soon</h3>
+				<p>I'm working on some exciting AI-first projects. Check back soon to see what I've been building!</p>
+			</div>
+		)}
+	</main>
+</Layout>
+
+<style>
+	.projects-page {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 2rem;
+	}
+
+	.projects-header {
+		text-align: center;
+		margin-bottom: 4rem;
+		padding: 2rem 0;
+	}
+
+	.projects-header h1 {
+		font-size: 2.5rem;
+		font-weight: 300;
+		margin-bottom: 1rem;
+		color: var(--text-primary);
+	}
+
+	.projects-subtitle {
+		font-size: 1.1rem;
+		color: var(--text-secondary);
+		max-width: 600px;
+		margin: 0 auto;
+		line-height: 1.6;
+	}
+
+	.featured-projects, .other-projects {
+		margin-bottom: 4rem;
+	}
+
+	.featured-projects h2, .other-projects h2 {
+		font-size: 1.75rem;
+		font-weight: 300;
+		margin-bottom: 2rem;
+		color: var(--text-primary);
+	}
+
+	.projects-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+		gap: 2rem;
+	}
+
+	.empty-state {
+		text-align: center;
+		padding: 4rem 2rem;
+		color: var(--text-secondary);
+	}
+
+	.empty-state h3 {
+		font-size: 1.5rem;
+		margin-bottom: 1rem;
+		color: var(--text-primary);
+	}
+
+	@media (max-width: 768px) {
+		.projects-page {
+			padding: 1rem;
+		}
+		
+		.projects-header h1 {
+			font-size: 2rem;
+		}
+		
+		.projects-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
