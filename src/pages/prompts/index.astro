@@ -1,0 +1,240 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const prompts = await getCollection('prompts');
+const sortedPrompts = prompts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<Layout title="Prompts - Jeff" description="A journal of AI prompts and their outcomes in my development process.">
+	<main class="prompts-page">
+		<div class="prompts-header">
+			<h1>Prompt Journal</h1>
+			<p class="prompts-subtitle">
+				A systematic approach to documenting AI interactions, capturing both the prompts 
+				and their outcomes to build a knowledge base of effective development patterns.
+			</p>
+		</div>
+
+		{prompts.length > 0 && (
+			<section class="prompts-list">
+				<div class="prompts-grid">
+					{sortedPrompts.map((prompt) => (
+						<article class="prompt-card">
+							<div class="prompt-header">
+								<h2 class="prompt-title">{prompt.data.title}</h2>
+								<time class="prompt-date" datetime={prompt.data.date.toISOString()}>
+									{prompt.data.date.toLocaleDateString('en-US', { 
+										year: 'numeric', 
+										month: 'long', 
+										day: 'numeric' 
+									})}
+								</time>
+							</div>
+							<p class="prompt-description">{prompt.data.description}</p>
+							
+							<div class="prompt-content">
+								<div class="prompt-section">
+									<h3>The Prompt</h3>
+									<pre class="prompt-text">{prompt.data.prompt}</pre>
+								</div>
+								
+								<div class="prompt-section">
+									<h3>Key Outputs</h3>
+									<ul class="outputs-list">
+										{prompt.data.outputs.map((output) => (
+											<li>{output}</li>
+										))}
+									</ul>
+								</div>
+								
+								{prompt.data.reflection && (
+									<div class="prompt-section">
+										<h3>Reflection</h3>
+										<p class="reflection-text">{prompt.data.reflection}</p>
+									</div>
+								)}
+							</div>
+						</article>
+					))}
+				</div>
+			</section>
+		)}
+
+		{prompts.length === 0 && (
+			<div class="empty-state">
+				<h3>No Prompts Yet</h3>
+				<p>Start documenting your AI interactions to build a knowledge base of effective patterns.</p>
+			</div>
+		)}
+	</main>
+</Layout>
+
+<style>
+	.prompts-page {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 2rem;
+	}
+
+	.prompts-header {
+		text-align: center;
+		margin-bottom: 4rem;
+		padding: 2rem 0;
+	}
+
+	.prompts-header h1 {
+		font-size: 2.5rem;
+		font-weight: 300;
+		margin-bottom: 1rem;
+		color: var(--text-primary);
+	}
+
+	.prompts-subtitle {
+		font-size: 1.1rem;
+		color: var(--text-secondary);
+		max-width: 600px;
+		margin: 0 auto;
+		line-height: 1.6;
+	}
+
+	.prompts-grid {
+		display: flex;
+		flex-direction: column;
+		gap: 3rem;
+	}
+
+	.prompt-card {
+		background: var(--bg-secondary);
+		border-radius: 12px;
+		padding: 2rem;
+		border: 1px solid var(--border-color);
+		transition: all 0.3s ease;
+	}
+
+	.prompt-card:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+	}
+
+	.prompt-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		margin-bottom: 1rem;
+		gap: 1rem;
+	}
+
+	.prompt-title {
+		font-size: 1.5rem;
+		font-weight: 500;
+		color: var(--text-primary);
+		margin: 0;
+		flex: 1;
+	}
+
+	.prompt-date {
+		font-size: 0.9rem;
+		color: var(--text-secondary);
+		white-space: nowrap;
+	}
+
+	.prompt-description {
+		color: var(--text-secondary);
+		margin-bottom: 2rem;
+		line-height: 1.6;
+	}
+
+	.prompt-content {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+	}
+
+	.prompt-section h3 {
+		font-size: 1.1rem;
+		font-weight: 500;
+		color: var(--text-primary);
+		margin-bottom: 1rem;
+	}
+
+	.prompt-text {
+		background: var(--bg-primary);
+		border: 1px solid var(--border-color);
+		border-radius: 8px;
+		padding: 1.5rem;
+		font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+		font-size: 0.9rem;
+		line-height: 1.5;
+		color: var(--text-primary);
+		white-space: pre-wrap;
+		overflow-x: auto;
+	}
+
+	.outputs-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.outputs-list li {
+		background: var(--bg-primary);
+		border: 1px solid var(--border-color);
+		border-radius: 6px;
+		padding: 1rem;
+		margin-bottom: 0.5rem;
+		color: var(--text-primary);
+		position: relative;
+		padding-left: 2rem;
+	}
+
+	.outputs-list li::before {
+		content: "✓";
+		position: absolute;
+		left: 0.75rem;
+		top: 1rem;
+		color: var(--accent-color);
+		font-weight: 600;
+	}
+
+	.reflection-text {
+		background: var(--bg-primary);
+		border: 1px solid var(--border-color);
+		border-radius: 8px;
+		padding: 1.5rem;
+		color: var(--text-primary);
+		line-height: 1.6;
+		font-style: italic;
+	}
+
+	.empty-state {
+		text-align: center;
+		padding: 4rem 2rem;
+		color: var(--text-secondary);
+	}
+
+	.empty-state h3 {
+		font-size: 1.5rem;
+		margin-bottom: 1rem;
+		color: var(--text-primary);
+	}
+
+	@media (max-width: 768px) {
+		.prompts-page {
+			padding: 1rem;
+		}
+		
+		.prompts-header h1 {
+			font-size: 2rem;
+		}
+		
+		.prompt-header {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+		
+		.prompt-date {
+			white-space: normal;
+		}
+	}
+</style>
