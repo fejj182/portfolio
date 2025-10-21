@@ -59,5 +59,26 @@ The model provided comprehensive coverage of Vercel deployment knowledge but did
 
 The documentation covers both immediate needs (monitoring, security) and long-term considerations (scaling, cost management), providing a solid foundation for managing the Vercel deployment going forward.
 
+## Follow-up Prompts
+
+### Prompt 1: Schema Validation Error
+```
+[InvalidContentEntryDataError] prompts → 20-01-2025-vercel-deployment-spike data does not match collection schema.
+  title**: **title: Required
+  description**: **description: Required
+  date**: **date: Invalid date
+  prompt**: **prompt: Required
+  outputs**: **outputs: Required
+```
+
+**Resolution**: Fixed the prompt log entry to match the correct schema format with proper frontmatter fields (title, description, date, prompt, outputs, reflection) and correct date format (2025-01-20).
+
+### Prompt 2: Agent Requirements Documentation
+```
+Let's create an AGENTS.md file and capture this requirement. Don't create any other requirements apart from this one (for the moment).
+```
+
+**Resolution**: Created AGENTS.md file with format awareness requirement to ensure future agents examine existing content structure and follow established schemas when creating new content.
+
 ## Jeff's Notes
 The model did not take note of the format of my previous prompts. I should mention this explicitly in the future.

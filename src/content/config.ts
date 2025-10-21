@@ -34,6 +34,7 @@ const prompts = defineCollection({
 		prompt: z.string(),
 		outputs: z.array(z.string()),
 		reflection: z.string().optional(),
+		followUpPrompts: z.array(z.string()).optional(),
 	}),
 });
 
