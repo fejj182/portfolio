@@ -14,7 +14,7 @@ When working with this codebase, agents must:
 
 When creating prompt journal entries, agents must:
 - Use the correct frontmatter schema from `src/content/config.ts`
-- Include all required fields: `title`, `description`, `date`, `prompt`, `outputs`, `reflection`
+- Include all required fields: `title`, `description`, `date`, `prompt`, `outputs`
 - Follow the established format pattern from existing entries
 - Use proper date format (YYYY-MM-DD)
 - Structure content consistently with existing entries
