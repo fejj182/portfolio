@@ -14,3 +14,4 @@ outputs:
   - "Included practical resources: commands, configuration examples, useful links"
   - "Identified key insights: Astro setup optimized, need monitoring setup, security headers via vercel.json, preview deployments crucial"
   - "Created follow-up actions: Vercel Analytics, security headers, preview testing, monitoring alerts"
+---
