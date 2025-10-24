@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 const prompts = await getCollection('prompts');
 const sortedPrompts = prompts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
@@ -16,29 +16,34 @@ const sortedPrompts = prompts.sort((a, b) => b.data.date.getTime() - a.data.date
 			</p>
 		</div>
 
-		{prompts.length > 0 && (
+		{sortedPrompts.length > 0 && (
 			<section class="prompts-list">
 				<div class="prompts-grid">
-					{sortedPrompts.map((prompt) => (
-						<article class="prompt-card">
-							<div class="prompt-header">
-								<h2 class="prompt-title">{prompt.data.title}</h2>
-								<time class="prompt-date" datetime={prompt.data.date.toISOString()}>
-									{prompt.data.date.toLocaleDateString('en-US', { 
-										year: 'numeric', 
-										month: 'long', 
-										day: 'numeric' 
-									})}
-								</time>
-							</div>
-							<div class="prompt-content" set:html={prompt.body}></div>
-						</article>
-					))}
+					{sortedPrompts.map(async (prompt) => {
+						const { Content } = await render(prompt);
+						return (
+							<article class="prompt-card">
+								<div class="prompt-header">
+									<h2 class="prompt-title">{prompt.data.title}</h2>
+									<time class="prompt-date" datetime={prompt.data.date.toISOString()}>
+										{prompt.data.date.toLocaleDateString('en-US', { 
+											year: 'numeric', 
+											month: 'long', 
+											day: 'numeric' 
+										})}
+									</time>
+								</div>
+								<div class="prompt-content">
+									<Content />
+								</div>
+							</article>
+						);
+					})}
 				</div>
 			</section>
 		)}
 
-		{prompts.length === 0 && (
+		{sortedPrompts.length === 0 && (
 			<div class="empty-state">
 				<h3>No Prompts Yet</h3>
 				<p>Start documenting your AI interactions to build a knowledge base of effective patterns.</p>
