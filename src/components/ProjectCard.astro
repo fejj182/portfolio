@@ -11,11 +11,11 @@ const { slug, data } = project;
 
 <article class="project-card">
 	<div class="project-card-content">
-		<h3 class="project-card-title">
+		<h4 class="project-card-title">
 			<a href={data.url || `/projects/${slug}`} target={data.url ? '_blank' : '_self'}>
 				{data.title}
 			</a>
-		</h3>
+		</h4>
 		<p class="project-card-description">{data.description}</p>
 		{data.tech && data.tech.length > 0 && (
 			<div class="project-card-tech">

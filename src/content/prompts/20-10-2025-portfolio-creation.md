@@ -3,7 +3,7 @@ title: "Portfolio Creation - AI-First Development"
 date: 2025-10-20
 ---
 
-## The Prompt
+### The Prompt
 
 I am a product engineer that needs a blog to show off his projects. Make me a fantastic one that has the minimum functionality. My goal is to have this live today.
 
@@ -16,7 +16,7 @@ About me (important grounding signals):
 • I'm analytical but open-ended — I like tech that helps me think, not just publish.
 • I'll likely write about the projects I'm working on.
 
-## Key Outputs
+### Key Outputs
 
 - Created Astro-based portfolio with content collections for blog posts and projects
 - Implemented calm, minimal design with thoughtful typography and spacing

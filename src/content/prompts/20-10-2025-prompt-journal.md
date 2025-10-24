@@ -3,7 +3,7 @@ title: "Prompt Commit Framework - Journal System"
 date: 2025-10-20
 ---
 
-## The Prompt
+### The Prompt
 
 Generate me a prompt commit framework that I can use as a kind of journal.
 
@@ -24,7 +24,7 @@ Create the first entry and summarize the outputs in an easy to digest way.
 Then create the second entry with the outputs of this one.
 Add a new section to my project called "Prompts", which will contain these entries.
 
-## Key Outputs
+### Key Outputs
 
 - Created prompts content collection with structured schema for documenting AI interactions
 - Implemented journal-style framework for tracking prompt effectiveness and outcomes
