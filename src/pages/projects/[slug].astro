@@ -1,0 +1,249 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+	const projects = await getCollection('projects');
+	return projects.map((project) => ({
+		params: { slug: project.slug },
+		props: { project },
+	}));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+---
+
+<Layout title={`${project.data.title} - Jeff`} description={project.data.description}>
+	<main class="project-detail">
+		<article class="project-content">
+			<header class="project-header">
+				<div class="project-meta">
+					<h1>{project.data.title}</h1>
+					<p class="project-description">{project.data.description}</p>
+					
+					{project.data.tech && (
+						<div class="project-tech">
+							{project.data.tech.map((tech) => (
+								<span class="tech-tag">{tech}</span>
+							))}
+						</div>
+					)}
+
+					<div class="project-links">
+						{project.data.url && (
+							<a href={project.data.url} class="btn btn-primary" target="_blank" rel="noopener">
+								View Live Demo
+							</a>
+						)}
+						{project.data.github && (
+							<a href={project.data.github} class="btn btn-secondary" target="_blank" rel="noopener">
+								View Source Code
+							</a>
+						)}
+					</div>
+				</div>
+			</header>
+
+			<div class="project-body">
+				<Content />
+			</div>
+		</article>
+
+		<nav class="project-navigation">
+			<a href="/projects" class="btn btn-outline">
+				← Back to Projects
+			</a>
+		</nav>
+	</main>
+</Layout>
+
+<style>
+	.project-detail {
+		max-width: 1000px;
+		margin: 0 auto;
+		padding: 2rem;
+	}
+
+	.project-content {
+		margin-bottom: 4rem;
+	}
+
+	.project-header {
+		margin-bottom: 4rem;
+		padding-bottom: 3rem;
+		border-bottom: 1px solid var(--border-color);
+	}
+
+	.project-meta h1 {
+		font-size: 3rem;
+		font-weight: 700;
+		margin-bottom: 1rem;
+		color: var(--text-primary);
+		line-height: 1.2;
+	}
+
+	.project-description {
+		font-size: 1.3rem;
+		color: var(--text-secondary);
+		line-height: 1.6;
+		margin-bottom: 2rem;
+	}
+
+	.project-tech {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		margin-bottom: 2rem;
+	}
+
+	.tech-tag {
+		background: var(--accent-color);
+		color: white;
+		padding: 0.5rem 1rem;
+		border-radius: 2rem;
+		font-size: 0.9rem;
+		font-weight: 500;
+	}
+
+	.project-links {
+		display: flex;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+
+
+	.project-body {
+		font-size: 1.1rem;
+		line-height: 1.7;
+		color: var(--text-primary);
+	}
+
+	.project-body h2 {
+		font-size: 2rem;
+		font-weight: 600;
+		margin: 3rem 0 1.5rem 0;
+		color: var(--text-primary);
+	}
+
+	.project-body h3 {
+		font-size: 1.5rem;
+		font-weight: 600;
+		margin: 2.5rem 0 1rem 0;
+		color: var(--text-primary);
+	}
+
+	.project-body h4 {
+		font-size: 1.2rem;
+		font-weight: 600;
+		margin: 2rem 0 0.75rem 0;
+		color: var(--text-primary);
+	}
+
+	.project-body p {
+		margin-bottom: 1.5rem;
+		color: var(--text-secondary);
+	}
+
+	.project-body ul, .project-body ol {
+		margin-bottom: 1.5rem;
+		padding-left: 2rem;
+	}
+
+	.project-body li {
+		margin-bottom: 0.5rem;
+		color: var(--text-secondary);
+	}
+
+	.project-body strong {
+		color: var(--text-primary);
+		font-weight: 600;
+	}
+
+	.project-body code {
+		background: var(--bg-secondary);
+		padding: 0.2rem 0.5rem;
+		border-radius: 0.25rem;
+		font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+		font-size: 0.9em;
+	}
+
+	.project-body pre {
+		background: var(--bg-secondary);
+		padding: 1.5rem;
+		border-radius: 0.5rem;
+		overflow-x: auto;
+		margin: 2rem 0;
+		border: 1px solid var(--border-color);
+	}
+
+	.project-body pre code {
+		background: none;
+		padding: 0;
+	}
+
+	.project-navigation {
+		text-align: center;
+		padding-top: 2rem;
+		border-top: 1px solid var(--border-color);
+	}
+
+	.btn {
+		padding: 0.75rem 1.5rem;
+		border-radius: 0.5rem;
+		text-decoration: none;
+		font-weight: 500;
+		transition: all 0.2s ease;
+		display: inline-block;
+	}
+
+	.btn-primary {
+		background: var(--accent-color);
+		color: white;
+	}
+
+	.btn-primary:hover {
+		background: var(--accent-hover);
+		transform: translateY(-1px);
+	}
+
+	.btn-secondary {
+		background: var(--bg-secondary);
+		color: var(--text-primary);
+		border: 1px solid var(--border-color);
+	}
+
+	.btn-secondary:hover {
+		background: var(--bg-primary);
+		transform: translateY(-1px);
+	}
+
+	.btn-outline {
+		background: transparent;
+		color: var(--text-primary);
+		border: 1px solid var(--border-color);
+	}
+
+	.btn-outline:hover {
+		background: var(--bg-secondary);
+		transform: translateY(-1px);
+	}
+
+	@media (max-width: 768px) {
+		.project-detail {
+			padding: 1rem;
+		}
+
+		.project-meta h1 {
+			font-size: 2.5rem;
+		}
+
+		.project-links {
+			flex-direction: column;
+		}
+
+		.btn {
+			text-align: center;
+		}
+	}
+</style>

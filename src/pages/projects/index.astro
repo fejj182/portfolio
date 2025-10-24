@@ -1,9 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-import ProjectCard from '../../components/ProjectCard.astro';
 
 const projects = await getCollection('projects');
+const featuredProject = projects.find(project => project.data.featured) || projects[0];
 ---
 
 <Layout title="Projects - Jeff" description="A showcase of AI-first digital products and thoughtful interfaces I've built.">
@@ -16,17 +16,57 @@ const projects = await getCollection('projects');
 			</p>
 		</div>
 
-		{projects.length > 0 && (
-			<section class="projects">
-				<div class="projects-grid">
-					{projects.map((project) => (
-						<ProjectCard project={project} />
-					))}
+		{featuredProject && (
+			<section class="featured-work">
+				<div class="featured-preview">
+					<div class="preview-content">
+						<div class="preview-header">
+							<h2>{featuredProject.data.title}</h2>
+							<p class="preview-description">{featuredProject.data.description}</p>
+						</div>
+						
+						<div class="preview-tech">
+							{featuredProject.data.tech && featuredProject.data.tech.map((tech) => (
+								<span class="tech-tag">{tech}</span>
+							))}
+						</div>
+
+						<div class="preview-highlights">
+							<div class="highlight">
+								<h4>Real-time Multiplayer</h4>
+								<p>Firebase Realtime Database for low-latency game synchronization</p>
+							</div>
+							<div class="highlight">
+								<h4>Comprehensive Testing</h4>
+								<p>Unit, integration, and E2E tests with 95%+ coverage</p>
+							</div>
+							<div class="highlight">
+								<h4>AI-Assisted Development</h4>
+								<p>8 detailed Architecture Decision Records documenting the build process</p>
+							</div>
+						</div>
+
+						<div class="preview-actions">
+							{featuredProject.data.url && (
+								<a href={featuredProject.data.url} class="btn btn-primary" target="_blank" rel="noopener">
+									View Live Demo
+								</a>
+							)}
+							{featuredProject.data.github && (
+								<a href={featuredProject.data.github} class="btn btn-secondary" target="_blank" rel="noopener">
+									View Source
+								</a>
+							)}
+							<a href={`/projects/${featuredProject.slug}`} class="btn btn-outline">
+								Read Full Case Study
+							</a>
+						</div>
+					</div>
 				</div>
 			</section>
 		)}
 
-		{projects.length === 0 && (
+		{!featuredProject && (
 			<div class="empty-state">
 				<h3>Projects Coming Soon</h3>
 				<p>I'm working on some exciting AI-first projects. Check back soon to see what I've been building!</p>
@@ -48,35 +88,152 @@ const projects = await getCollection('projects');
 		padding: 2rem 0;
 	}
 
-
 	.projects-subtitle {
 		max-width: 600px;
 		margin: 0 auto;
 	}
 
-	.projects {
+	.featured-work {
 		margin-bottom: 4rem;
 	}
 
-	.projects-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+	.featured-preview {
+		background: var(--bg-secondary);
+		border-radius: 1rem;
+		padding: 3rem;
+		border: 1px solid var(--border-color);
+		box-shadow: var(--shadow-md);
+	}
+
+	.preview-content {
+		display: flex;
+		flex-direction: column;
 		gap: 2rem;
 	}
+
+	.preview-header h2 {
+		font-size: 2.5rem;
+		font-weight: 700;
+		margin-bottom: 1rem;
+		color: var(--text-primary);
+	}
+
+	.preview-description {
+		font-size: 1.2rem;
+		color: var(--text-secondary);
+		line-height: 1.6;
+	}
+
+	.preview-tech {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.tech-tag {
+		background: var(--accent-color);
+		color: white;
+		padding: 0.5rem 1rem;
+		border-radius: 2rem;
+		font-size: 0.9rem;
+		font-weight: 500;
+	}
+
+	.preview-highlights {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 1.5rem;
+	}
+
+	.highlight h4 {
+		font-size: 1.1rem;
+		font-weight: 600;
+		margin-bottom: 0.5rem;
+		color: var(--text-primary);
+	}
+
+	.highlight p {
+		font-size: 0.95rem;
+		color: var(--text-secondary);
+		line-height: 1.5;
+	}
+
+	.preview-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+	}
+
+	.btn {
+		padding: 0.75rem 1.5rem;
+		border-radius: 0.5rem;
+		text-decoration: none;
+		font-weight: 500;
+		transition: all 0.2s ease;
+		display: inline-block;
+	}
+
+	.btn-primary {
+		background: var(--accent-color);
+		color: white;
+	}
+
+	.btn-primary:hover {
+		background: var(--accent-hover);
+		transform: translateY(-1px);
+	}
+
+	.btn-secondary {
+		background: var(--bg-secondary);
+		color: var(--text-primary);
+		border: 1px solid var(--border-color);
+	}
+
+	.btn-secondary:hover {
+		background: var(--bg-primary);
+		transform: translateY(-1px);
+	}
+
+	.btn-outline {
+		background: transparent;
+		color: var(--text-primary);
+		border: 1px solid var(--border-color);
+	}
+
+	.btn-outline:hover {
+		background: var(--bg-secondary);
+		transform: translateY(-1px);
+	}
+
 
 	.empty-state {
 		text-align: center;
 		padding: 4rem 2rem;
 	}
 
-
 	@media (max-width: 768px) {
 		.projects-page {
 			padding: 1rem;
 		}
 		
-		.projects-grid {
+		.featured-preview {
+			padding: 2rem;
+		}
+
+		.preview-header h2 {
+			font-size: 2rem;
+		}
+
+		.preview-highlights {
 			grid-template-columns: 1fr;
+		}
+
+		.preview-actions {
+			flex-direction: column;
+		}
+
+		.btn {
+			text-align: center;
 		}
 	}
 </style>
