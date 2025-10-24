@@ -1,10 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-import BlogCard from '../components/BlogCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 
-const posts = await getCollection('blog');
 const projects = await getCollection('projects');
 ---
 
@@ -17,8 +15,8 @@ const projects = await getCollection('projects');
 					Product engineer crafting calm, intelligent interfaces that help you think, not just publish.
 				</p>
 				<div class="hero-links">
-					<a href="/blog" class="btn-primary">Read my thoughts</a>
-					<a href="#projects" class="btn-secondary">See my work</a>
+					<a href="/projects" class="btn-primary">See my work</a>
+					<a href="/prompts" class="btn-secondary">View prompts</a>
 				</div>
 			</div>
 		</section>
@@ -52,17 +50,6 @@ const projects = await getCollection('projects');
 			</div>
 		</section>
 
-		<section class="recent-posts">
-			<h2>Recent Thoughts</h2>
-			<div class="posts-grid">
-				{posts.slice(0, 3).map((post) => (
-					<BlogCard post={post} />
-				))}
-			</div>
-			<div class="posts-link">
-				<a href="/blog" class="btn-secondary">Read all posts</a>
-			</div>
-		</section>
 	</main>
 </Layout>
 
@@ -127,12 +114,12 @@ const projects = await getCollection('projects');
 		margin-bottom: 1.5rem;
 	}
 
-	.projects, .recent-posts {
+	.projects {
 		padding: 4rem 0;
 		border-top: 1px solid var(--border-color);
 	}
 
-	.projects h2, .recent-posts h2 {
+	.projects h2 {
 		font-size: 2rem;
 		font-weight: 300;
 		margin-bottom: 3rem;
@@ -140,14 +127,14 @@ const projects = await getCollection('projects');
 		color: var(--text-primary);
 	}
 
-	.projects-grid, .posts-grid {
+	.projects-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 		gap: 2rem;
 		margin-bottom: 3rem;
 	}
 
-	.projects-link, .posts-link {
+	.projects-link {
 		text-align: center;
 	}
 
