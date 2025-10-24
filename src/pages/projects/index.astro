@@ -98,11 +98,23 @@ const featuredProject = projects.find(project => project.data.featured) || proje
 	}
 
 	.featured-preview {
-		background: var(--bg-secondary);
+		background: var(--gradient-secondary);
 		border-radius: 1rem;
 		padding: 3rem;
 		border: 1px solid var(--border-color);
-		box-shadow: var(--shadow-md);
+		box-shadow: var(--shadow-lg);
+		position: relative;
+		overflow: hidden;
+	}
+
+	.featured-preview::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 4px;
+		background: var(--gradient-primary);
 	}
 
 	.preview-content {
@@ -131,12 +143,13 @@ const featuredProject = projects.find(project => project.data.featured) || proje
 	}
 
 	.tech-tag {
-		background: var(--accent-color);
+		background: var(--gradient-primary);
 		color: white;
 		padding: 0.5rem 1rem;
 		border-radius: 2rem;
 		font-size: 0.9rem;
 		font-weight: 500;
+		box-shadow: var(--shadow-sm);
 	}
 
 	.preview-highlights {
@@ -174,13 +187,15 @@ const featuredProject = projects.find(project => project.data.featured) || proje
 	}
 
 	.btn-primary {
-		background: var(--accent-color);
+		background: var(--gradient-primary);
 		color: white;
+		box-shadow: var(--shadow-sm);
 	}
 
 	.btn-primary:hover {
-		background: var(--accent-hover);
-		transform: translateY(-1px);
+		background: var(--accent-color);
+		box-shadow: var(--shadow-md);
+		transform: translateY(-2px);
 	}
 
 	.btn-secondary {
@@ -190,7 +205,9 @@ const featuredProject = projects.find(project => project.data.featured) || proje
 	}
 
 	.btn-secondary:hover {
-		background: var(--bg-primary);
+		background: var(--gradient-secondary);
+		border-color: var(--accent-color);
+		color: var(--accent-color);
 		transform: translateY(-1px);
 	}
 
@@ -201,7 +218,9 @@ const featuredProject = projects.find(project => project.data.featured) || proje
 	}
 
 	.btn-outline:hover {
-		background: var(--bg-secondary);
+		background: var(--gradient-secondary);
+		border-color: var(--accent-color);
+		color: var(--accent-color);
 		transform: translateY(-1px);
 	}
 

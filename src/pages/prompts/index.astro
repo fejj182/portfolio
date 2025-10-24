@@ -78,16 +78,34 @@ const sortedPrompts = prompts.sort((a, b) => b.data.date.getTime() - a.data.date
 	}
 
 	.prompt-card {
-		background: var(--bg-secondary);
+		background: var(--gradient-secondary);
 		border-radius: 12px;
 		padding: 2rem;
 		border: 1px solid var(--border-color);
 		transition: all 0.3s ease;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.prompt-card::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 3px;
+		background: var(--gradient-primary);
+		opacity: 0;
+		transition: opacity 0.3s ease;
 	}
 
 	.prompt-card:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+		transform: translateY(-4px);
+		box-shadow: var(--shadow-lg);
+	}
+
+	.prompt-card:hover::before {
+		opacity: 1;
 	}
 
 	.prompt-header {
@@ -108,7 +126,7 @@ const sortedPrompts = prompts.sort((a, b) => b.data.date.getTime() - a.data.date
 	}
 
 	.prompt-content pre {
-		background: var(--bg-primary);
+		background: var(--gradient-secondary);
 		border: 1px solid var(--border-color);
 		border-radius: 8px;
 		padding: 1.5rem;
@@ -116,21 +134,28 @@ const sortedPrompts = prompts.sort((a, b) => b.data.date.getTime() - a.data.date
 		white-space: pre-wrap;
 		overflow-x: auto;
 		margin: 1rem 0;
+		box-shadow: var(--shadow-sm);
 	}
 
 	.prompt-content code {
-		background: var(--bg-primary);
-		border: 1px solid var(--border-color);
+		background: var(--gradient-primary);
+		color: white;
+		border: none;
 		border-radius: 4px;
 		padding: 0.2rem 0.4rem;
 		font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+		font-size: 0.9em;
 	}
 
 	.prompt-content blockquote {
-		border-left: 4px solid var(--accent-color);
+		border-left: 4px solid;
+		border-image: var(--gradient-primary) 1;
 		padding-left: 1rem;
 		margin: 1rem 0;
 		font-style: italic;
+		background: var(--gradient-secondary);
+		padding: 1rem;
+		border-radius: 0 8px 8px 0;
 	}
 
 	.empty-state {

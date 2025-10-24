@@ -48,16 +48,22 @@ const { title, description = "Product engineer crafting calm, intelligent interf
 
 <style is:global>
 	:root {
-		--bg-primary: #fafafa;
+		--bg-primary: #faf8ff;
 		--bg-secondary: #ffffff;
 		--text-primary: #1a1a1a;
-		--text-secondary: #666666;
-		--text-muted: #999999;
+		--text-secondary: #6b7280;
+		--text-muted: #9ca3af;
 		--border-color: #e5e5e5;
-		--accent-color: #2563eb;
-		--accent-hover: #1d4ed8;
-		--shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-		--shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+		--accent-color: #8b5cf6;
+		--accent-hover: #7c3aed;
+		--accent-light: #c4b5fd;
+		--purple-light: #ddd6fe;
+		--purple-medium: #a855f7;
+		--gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+		--gradient-secondary: linear-gradient(135deg, #ddd6fe 0%, #ffffff 100%);
+		--shadow-sm: 0 1px 2px 0 rgb(139 92 246 / 0.1);
+		--shadow-md: 0 4px 6px -1px rgb(139 92 246 / 0.15), 0 2px 4px -2px rgb(139 92 246 / 0.1);
+		--shadow-lg: 0 10px 15px -3px rgb(139 92 246 / 0.1), 0 4px 6px -4px rgb(139 92 246 / 0.1);
 		--radius: 8px;
 	}
 
@@ -118,13 +124,16 @@ const { title, description = "Product engineer crafting calm, intelligent interf
 	}
 
 	.btn-primary {
-		background-color: var(--accent-color);
+		background: var(--gradient-primary);
 		color: white;
+		box-shadow: var(--shadow-sm);
 	}
 
 	.btn-primary:hover {
-		background-color: var(--accent-hover);
+		background: var(--accent-color);
 		color: white;
+		box-shadow: var(--shadow-md);
+		transform: translateY(-1px);
 	}
 
 	.btn-secondary {
@@ -134,14 +143,15 @@ const { title, description = "Product engineer crafting calm, intelligent interf
 	}
 
 	.btn-secondary:hover {
-		background-color: var(--bg-secondary);
+		background: var(--gradient-secondary);
 		border-color: var(--accent-color);
 		color: var(--accent-color);
+		transform: translateY(-1px);
 	}
 
 	/* Header */
 	.header {
-		background-color: var(--bg-secondary);
+		background: var(--gradient-secondary);
 		border-bottom: 1px solid var(--border-color);
 		position: sticky;
 		top: 0;
@@ -171,18 +181,18 @@ const { title, description = "Product engineer crafting calm, intelligent interf
 	}
 
 	.nav-links a {
-		color: var(--text-secondary);
+		color: var(--text-primary);
 		font-weight: 400;
 		transition: color 0.2s ease;
 	}
 
 	.nav-links a:hover {
-		color: var(--text-primary);
+		color: var(--accent-color);
 	}
 
 	/* Footer */
 	.footer {
-		background-color: var(--bg-secondary);
+		background: var(--gradient-secondary);
 		border-top: 1px solid var(--border-color);
 		margin-top: 4rem;
 	}
