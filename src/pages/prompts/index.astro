@@ -65,19 +65,10 @@ const sortedPrompts = prompts.sort((a, b) => b.data.date.getTime() - a.data.date
 		padding: 2rem 0;
 	}
 
-	.prompts-header h1 {
-		font-size: 2.5rem;
-		font-weight: 300;
-		margin-bottom: 1rem;
-		color: var(--text-primary);
-	}
 
 	.prompts-subtitle {
-		font-size: 1.1rem;
-		color: var(--text-secondary);
 		max-width: 600px;
 		margin: 0 auto;
-		line-height: 1.6;
 	}
 
 	.prompts-grid {
@@ -103,58 +94,17 @@ const sortedPrompts = prompts.sort((a, b) => b.data.date.getTime() - a.data.date
 		display: flex;
 		justify-content: space-between;
 		align-items: flex-start;
-		margin-bottom: 1rem;
 		gap: 1rem;
 	}
 
 	.prompt-title {
-		font-size: 1.5rem;
 		font-weight: 500;
-		color: var(--text-primary);
 		margin: 0;
 		flex: 1;
 	}
 
 	.prompt-date {
-		font-size: 0.9rem;
-		color: var(--text-secondary);
 		white-space: nowrap;
-	}
-
-	.prompt-description {
-		color: var(--text-secondary);
-		margin-bottom: 2rem;
-		line-height: 1.6;
-	}
-
-	.prompt-content {
-		line-height: 1.6;
-		color: var(--text-primary);
-	}
-
-	.prompt-content h1,
-	.prompt-content h2,
-	.prompt-content h3,
-	.prompt-content h4,
-	.prompt-content h5,
-	.prompt-content h6 {
-		color: var(--text-primary);
-		margin-top: 1.5rem;
-		margin-bottom: 0.5rem;
-	}
-
-	.prompt-content h1:first-child,
-	.prompt-content h2:first-child,
-	.prompt-content h3:first-child,
-	.prompt-content h4:first-child,
-	.prompt-content h5:first-child,
-	.prompt-content h6:first-child {
-		margin-top: 0;
-	}
-
-	.prompt-content p {
-		margin-bottom: 1rem;
-		color: var(--text-secondary);
 	}
 
 	.prompt-content pre {
@@ -163,9 +113,6 @@ const sortedPrompts = prompts.sort((a, b) => b.data.date.getTime() - a.data.date
 		border-radius: 8px;
 		padding: 1.5rem;
 		font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-		font-size: 0.9rem;
-		line-height: 1.5;
-		color: var(--text-primary);
 		white-space: pre-wrap;
 		overflow-x: auto;
 		margin: 1rem 0;
@@ -177,19 +124,6 @@ const sortedPrompts = prompts.sort((a, b) => b.data.date.getTime() - a.data.date
 		border-radius: 4px;
 		padding: 0.2rem 0.4rem;
 		font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-		font-size: 0.9em;
-		color: var(--text-primary);
-	}
-
-	.prompt-content ul,
-	.prompt-content ol {
-		margin-bottom: 1rem;
-		padding-left: 1.5rem;
-	}
-
-	.prompt-content li {
-		margin-bottom: 0.5rem;
-		color: var(--text-secondary);
 	}
 
 	.prompt-content blockquote {
@@ -197,28 +131,17 @@ const sortedPrompts = prompts.sort((a, b) => b.data.date.getTime() - a.data.date
 		padding-left: 1rem;
 		margin: 1rem 0;
 		font-style: italic;
-		color: var(--text-secondary);
 	}
 
 	.empty-state {
 		text-align: center;
 		padding: 4rem 2rem;
-		color: var(--text-secondary);
 	}
 
-	.empty-state h3 {
-		font-size: 1.5rem;
-		margin-bottom: 1rem;
-		color: var(--text-primary);
-	}
 
 	@media (max-width: 768px) {
 		.prompts-page {
 			padding: 1rem;
-		}
-		
-		.prompts-header h1 {
-			font-size: 2rem;
 		}
 		
 		.prompt-header {

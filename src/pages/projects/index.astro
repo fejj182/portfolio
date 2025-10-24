@@ -62,30 +62,14 @@ const otherProjects = projects.filter(project => !project.data.featured);
 		padding: 2rem 0;
 	}
 
-	.projects-header h1 {
-		font-size: 2.5rem;
-		font-weight: 300;
-		margin-bottom: 1rem;
-		color: var(--text-primary);
-	}
 
 	.projects-subtitle {
-		font-size: 1.1rem;
-		color: var(--text-secondary);
 		max-width: 600px;
 		margin: 0 auto;
-		line-height: 1.6;
 	}
 
 	.featured-projects, .other-projects {
 		margin-bottom: 4rem;
-	}
-
-	.featured-projects h2, .other-projects h2 {
-		font-size: 1.75rem;
-		font-weight: 300;
-		margin-bottom: 2rem;
-		color: var(--text-primary);
 	}
 
 	.projects-grid {
@@ -97,22 +81,12 @@ const otherProjects = projects.filter(project => !project.data.featured);
 	.empty-state {
 		text-align: center;
 		padding: 4rem 2rem;
-		color: var(--text-secondary);
 	}
 
-	.empty-state h3 {
-		font-size: 1.5rem;
-		margin-bottom: 1rem;
-		color: var(--text-primary);
-	}
 
 	@media (max-width: 768px) {
 		.projects-page {
 			padding: 1rem;
-		}
-		
-		.projects-header h1 {
-			font-size: 2rem;
 		}
 		
 		.projects-grid {

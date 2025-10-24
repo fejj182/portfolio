@@ -65,21 +65,14 @@ const projects = await getCollection('projects');
 	}
 
 	.hero h1 {
-		font-size: 3rem;
-		font-weight: 300;
-		line-height: 1.2;
 		margin-bottom: 1.5rem;
-		color: var(--text-primary);
 	}
 
 	.hero-subtitle {
-		font-size: 1.25rem;
-		color: var(--text-secondary);
 		margin-bottom: 3rem;
 		max-width: 600px;
 		margin-left: auto;
 		margin-right: auto;
-		line-height: 1.6;
 	}
 
 	.hero-links {
@@ -99,31 +92,14 @@ const projects = await getCollection('projects');
 		margin: 0 auto;
 	}
 
-	.about h2 {
-		font-size: 2rem;
-		font-weight: 300;
-		margin-bottom: 2rem;
-		color: var(--text-primary);
-	}
-
-	.about p {
-		font-size: 1.1rem;
-		line-height: 1.7;
-		color: var(--text-secondary);
-		margin-bottom: 1.5rem;
-	}
-
 	.projects {
 		padding: 4rem 0;
 		border-top: 1px solid var(--border-color);
 	}
 
 	.projects h2 {
-		font-size: 2rem;
-		font-weight: 300;
-		margin-bottom: 3rem;
 		text-align: center;
-		color: var(--text-primary);
+		margin-bottom: 3rem;
 	}
 
 	.projects-grid {
@@ -138,14 +114,6 @@ const projects = await getCollection('projects');
 	}
 
 	@media (max-width: 768px) {
-		.hero h1 {
-			font-size: 2.5rem;
-		}
-		
-		.hero-subtitle {
-			font-size: 1.1rem;
-		}
-		
 		.hero-links {
 			flex-direction: column;
 			align-items: center;
