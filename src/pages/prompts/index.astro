@@ -31,30 +31,7 @@ const sortedPrompts = prompts.sort((a, b) => b.data.date.getTime() - a.data.date
 									})}
 								</time>
 							</div>
-							<p class="prompt-description">{prompt.data.description}</p>
-							
-							<div class="prompt-content">
-								<div class="prompt-section">
-									<h3>The Prompt</h3>
-									<pre class="prompt-text">{prompt.data.prompt}</pre>
-								</div>
-								
-								<div class="prompt-section">
-									<h3>Key Outputs</h3>
-									<ul class="outputs-list">
-										{prompt.data.outputs.map((output) => (
-											<li>{output}</li>
-										))}
-									</ul>
-								</div>
-								
-								{prompt.data.reflection && (
-									<div class="prompt-section">
-										<h3>Reflection</h3>
-										<p class="reflection-text">{prompt.data.reflection}</p>
-									</div>
-								)}
-							</div>
+							<div class="prompt-content" set:html={prompt.body}></div>
 						</article>
 					))}
 				</div>
@@ -146,19 +123,36 @@ const sortedPrompts = prompts.sort((a, b) => b.data.date.getTime() - a.data.date
 	}
 
 	.prompt-content {
-		display: flex;
-		flex-direction: column;
-		gap: 2rem;
-	}
-
-	.prompt-section h3 {
-		font-size: 1.1rem;
-		font-weight: 500;
+		line-height: 1.6;
 		color: var(--text-primary);
-		margin-bottom: 1rem;
 	}
 
-	.prompt-text {
+	.prompt-content h1,
+	.prompt-content h2,
+	.prompt-content h3,
+	.prompt-content h4,
+	.prompt-content h5,
+	.prompt-content h6 {
+		color: var(--text-primary);
+		margin-top: 1.5rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.prompt-content h1:first-child,
+	.prompt-content h2:first-child,
+	.prompt-content h3:first-child,
+	.prompt-content h4:first-child,
+	.prompt-content h5:first-child,
+	.prompt-content h6:first-child {
+		margin-top: 0;
+	}
+
+	.prompt-content p {
+		margin-bottom: 1rem;
+		color: var(--text-secondary);
+	}
+
+	.prompt-content pre {
 		background: var(--bg-primary);
 		border: 1px solid var(--border-color);
 		border-radius: 8px;
@@ -169,42 +163,36 @@ const sortedPrompts = prompts.sort((a, b) => b.data.date.getTime() - a.data.date
 		color: var(--text-primary);
 		white-space: pre-wrap;
 		overflow-x: auto;
+		margin: 1rem 0;
 	}
 
-	.outputs-list {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-	}
-
-	.outputs-list li {
+	.prompt-content code {
 		background: var(--bg-primary);
 		border: 1px solid var(--border-color);
-		border-radius: 6px;
-		padding: 1rem;
+		border-radius: 4px;
+		padding: 0.2rem 0.4rem;
+		font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+		font-size: 0.9em;
+		color: var(--text-primary);
+	}
+
+	.prompt-content ul,
+	.prompt-content ol {
+		margin-bottom: 1rem;
+		padding-left: 1.5rem;
+	}
+
+	.prompt-content li {
 		margin-bottom: 0.5rem;
-		color: var(--text-primary);
-		position: relative;
-		padding-left: 2rem;
+		color: var(--text-secondary);
 	}
 
-	.outputs-list li::before {
-		content: "✓";
-		position: absolute;
-		left: 0.75rem;
-		top: 1rem;
-		color: var(--accent-color);
-		font-weight: 600;
-	}
-
-	.reflection-text {
-		background: var(--bg-primary);
-		border: 1px solid var(--border-color);
-		border-radius: 8px;
-		padding: 1.5rem;
-		color: var(--text-primary);
-		line-height: 1.6;
+	.prompt-content blockquote {
+		border-left: 4px solid var(--accent-color);
+		padding-left: 1rem;
+		margin: 1rem 0;
 		font-style: italic;
+		color: var(--text-secondary);
 	}
 
 	.empty-state {

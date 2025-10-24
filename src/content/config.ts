@@ -17,12 +17,7 @@ const prompts = defineCollection({
 	type: 'content',
 	schema: z.object({
 		title: z.string(),
-		description: z.string(),
 		date: z.coerce.date(),
-		prompt: z.string(),
-		outputs: z.array(z.string()),
-		reflection: z.string().optional(),
-		followUpPrompts: z.array(z.string()).optional(),
 	}),
 });
 
