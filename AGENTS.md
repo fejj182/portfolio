@@ -1,5 +1,14 @@
 # Agent Requirements
 
+## Documentation-First Approach
+
+When working with this codebase, agents must:
+
+1. **Always start with official documentation** - Check docs.astro.build, docs.react.dev, etc. first
+2. **Follow official patterns exactly** - Use exact patterns from official docs, not third-party sources
+3. **Prioritize official sources** over community tutorials or outdated patterns
+4. **Verify approach against official docs** before implementing any solution
+
 ## Format Awareness Requirement
 
 When working with this codebase, agents must:
