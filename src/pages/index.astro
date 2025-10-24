@@ -1,9 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
-import ProjectCard from '../components/ProjectCard.astro';
-
-const projects = await getCollection('projects');
 ---
 
 <Layout title="Jeff - AI-First Product Engineer">
@@ -37,17 +33,6 @@ const projects = await getCollection('projects');
 			</div>
 		</section>
 
-		<section id="projects" class="projects">
-			<h2>Featured Projects</h2>
-			<div class="projects-grid">
-				{projects.slice(0, 3).map((project) => (
-					<ProjectCard project={project} />
-				))}
-			</div>
-			<div class="projects-link">
-				<a href="/projects" class="btn-secondary">View all projects</a>
-			</div>
-		</section>
 
 	</main>
 </Layout>
@@ -92,26 +77,6 @@ const projects = await getCollection('projects');
 		margin: 0 auto;
 	}
 
-	.projects {
-		padding: 4rem 0;
-		border-top: 1px solid var(--border-color);
-	}
-
-	.projects h2 {
-		text-align: center;
-		margin-bottom: 3rem;
-	}
-
-	.projects-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-		gap: 2rem;
-		margin-bottom: 3rem;
-	}
-
-	.projects-link {
-		text-align: center;
-	}
 
 	@media (max-width: 768px) {
 		.hero-links {

@@ -4,8 +4,6 @@ import { getCollection } from 'astro:content';
 import ProjectCard from '../../components/ProjectCard.astro';
 
 const projects = await getCollection('projects');
-const featuredProjects = projects.filter(project => project.data.featured);
-const otherProjects = projects.filter(project => !project.data.featured);
 ---
 
 <Layout title="Projects - Jeff" description="A showcase of AI-first digital products and thoughtful interfaces I've built.">
@@ -18,22 +16,10 @@ const otherProjects = projects.filter(project => !project.data.featured);
 			</p>
 		</div>
 
-		{featuredProjects.length > 0 && (
-			<section class="featured-projects">
-				<h2>Featured Projects</h2>
+		{projects.length > 0 && (
+			<section class="projects">
 				<div class="projects-grid">
-					{featuredProjects.map((project) => (
-						<ProjectCard project={project} />
-					))}
-				</div>
-			</section>
-		)}
-
-		{otherProjects.length > 0 && (
-			<section class="other-projects">
-				<h2>Other Projects</h2>
-				<div class="projects-grid">
-					{otherProjects.map((project) => (
+					{projects.map((project) => (
 						<ProjectCard project={project} />
 					))}
 				</div>
@@ -68,7 +54,7 @@ const otherProjects = projects.filter(project => !project.data.featured);
 		margin: 0 auto;
 	}
 
-	.featured-projects, .other-projects {
+	.projects {
 		margin-bottom: 4rem;
 	}
 
